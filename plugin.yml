@@ -1,0 +1,38 @@
+name: SwVIP
+version: 1.0.0
+description: VIP system
+author: [SnowRunescape]
+website: https://snowdev.com.br
+
+main: br.com.snowdev.swvip.SwVIP
+softdepend: [Vault]
+
+commands:
+    swvip:
+        description: Shows the plugin commands.
+        aliases: []
+        usage: /<command>
+    newkey:
+        description: New key with X days for a given group.
+        aliases: [gerarkey]
+        usage: /<command> <group> <days>
+    usekey:
+        description: Uses a VIP key.
+        aliases: [usarkey]
+        usage: /<command> <key>
+    viptime:
+        description: Shows the remaining time of the VIP.
+        aliases: [tempovip]
+        usage: /<command>
+    changevip:
+        description: Change your VIP.
+        aliases: [trocarvip]
+        usage: /<command> <group>
+    givevip:
+        description: Give VIP, directly.
+        aliases: [darvip]
+        usage: /<command> <name> <group> <days>
+    removevip:
+        description: Remove a VIP from player.
+        aliases: [tirarvip]
+        usage: /<command> <name> <group>
