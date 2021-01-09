@@ -5,7 +5,7 @@ import java.io.File;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import br.com.snowdev.commands.MainCommand;
+import br.com.snowdev.swvip.commands.MainCommand;
 
 public class SwVIP extends JavaPlugin {
 	public YamlConfiguration ResourceMessage;

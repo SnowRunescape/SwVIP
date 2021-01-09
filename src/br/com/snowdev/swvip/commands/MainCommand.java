@@ -1,4 +1,4 @@
-package br.com.snowdev.commands;
+package br.com.snowdev.swvip.commands;
 
 import java.util.Map;
 

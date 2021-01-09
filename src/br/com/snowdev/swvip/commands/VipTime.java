@@ -1,4 +1,4 @@
-package br.com.snowdev.commands;
+package br.com.snowdev.swvip.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

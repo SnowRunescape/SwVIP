@@ -1,10 +1,11 @@
-package br.com.snowdev.commands;
+package br.com.snowdev.swvip.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class UseKey implements CommandExecutor {
+@CommandPermissions("swvip.command.admin.newkey")
+public class NewKey implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		return false;
 	}

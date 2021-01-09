@@ -1,4 +1,4 @@
-package br.com.snowdev.commands;
+package br.com.snowdev.swvip.commands;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
