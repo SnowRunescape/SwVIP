@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
+import br.com.snowdev.swvip.interfaces.CommandPermissions;
 import br.com.snowdev.swvip.utilities.Messaging;
 
 public class MainCommand implements CommandExecutor {
@@ -16,6 +17,12 @@ public class MainCommand implements CommandExecutor {
 	
 	public MainCommand(){
 		CommandMap.put("swvip", new SwVIP());
+		CommandMap.put("newkey", new SwVIP());
+		CommandMap.put("usekey", new SwVIP());
+		CommandMap.put("viptime", new SwVIP());
+		CommandMap.put("changevip", new SwVIP());
+		CommandMap.put("givevip", new SwVIP());
+		CommandMap.put("removevip", new SwVIP());
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){

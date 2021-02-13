@@ -19,7 +19,15 @@ public class SwVIP extends JavaPlugin {
 		
 		this.loadMessages();
 		
-		getCommand("resgatarvip").setExecutor(new MainCommand());
+		MainCommand MainCommand = new MainCommand();
+		
+		getCommand("swvip").setExecutor(MainCommand);
+		getCommand("newkey").setExecutor(MainCommand);
+		getCommand("usekey").setExecutor(MainCommand);
+		getCommand("viptime").setExecutor(MainCommand);
+		getCommand("changevip").setExecutor(MainCommand);
+		getCommand("givevip").setExecutor(MainCommand);
+		getCommand("removevip").setExecutor(MainCommand);
 	}
 	
     private void loadMessages(){
