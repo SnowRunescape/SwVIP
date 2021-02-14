@@ -29,7 +29,7 @@ public class NewKey implements CommandExecutor {
 				int days = Integer.parseInt(args[1]);
 				int uses = Integer.parseInt(args[2]);
 				
-				if(days > 0){
+				if(days > 0 && uses > 0){
 					SwKey key = this.createNewKey(group, days, uses);
 					
 					if(key != null) {
@@ -44,10 +44,12 @@ public class NewKey implements CommandExecutor {
 						//aconteceu um erro ao criar a key vip
 					}
 				} else {
-					//dias informado é invalido
+					String message = "§fO número de dias e usos deve ser maior que 0.";
+					sender.sendMessage(Messaging.format(message,true, true));
 				}
 			} else {
-				//grupo que esta tentando criar a key vip não existe
+				String message = "§fO grupo de VIP que você digitou não existe.";
+				sender.sendMessage(Messaging.format(message,true, true));
 			}
 		} else {
 			//comando invalido, execute desse jeito...
