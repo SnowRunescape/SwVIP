@@ -8,8 +8,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.commands.MainCommand;
+import br.com.snowdev.swvip.storage.SQLManager;
 
 public class SwVIP extends JavaPlugin {
+	private static SQLManager SQLManager;
+	
 	public YamlConfiguration ResourceMessage;
 	
 	public static Boolean flatFile = true;
@@ -59,4 +62,17 @@ public class SwVIP extends JavaPlugin {
     	
     	this.ResourceMessage = YamlConfiguration.loadConfiguration(resourceMessage);
     }
+
+	public static SQLManager SQLManager(){
+		if(SwVIP.SQLManager == null){
+			String host = SwVIP.instance.getConfig().getString("database.host");
+			String user= SwVIP.instance.getConfig().getString("database.user");
+			String pass= SwVIP.instance.getConfig().getString("database.pass");
+			String db = SwVIP.instance.getConfig().getString("database.db");
+			
+			SwVIP.SQLManager = new SQLManager(user, pass, host, db);
+		}
+		
+		return SwVIP.SQLManager;
+	}
 }

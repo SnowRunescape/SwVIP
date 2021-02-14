@@ -1,5 +1,8 @@
 package br.com.snowdev.swvip.commands;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -74,8 +77,25 @@ public class NewKey implements CommandExecutor {
 			
 			return new SwKey(key, group, days);
 		} else {
-			//ThreadVZ nk = new ThreadVZ(plugin,"newkey",sender,grupo,dias,key);
-			//nk.start();
+			try {
+				while(true){
+					ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE key = ?", key);
+					
+					if(!rs.next()){
+						int rs2 = SwVIP.SQLManager().update("INSERT INTO swvip VALUES (?, ?, ?)");
+						
+						if(rs2 == 1){
+							return new SwKey(key, group, days);
+						} else {
+							return null;
+						}
+					}
+					
+					key = SwVIP.FormatKey();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;

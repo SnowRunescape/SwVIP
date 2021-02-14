@@ -1,5 +1,7 @@
 package br.com.snowdev.swvip.commands;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +55,19 @@ public class Keys implements CommandExecutor {
 				}
 			}
 		} else {
-			
+			try {
+				ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip");
+				
+				while(rs.next()){
+					String key = rs.getString("key");
+					String group = rs.getString("group");
+					int days = rs.getInt("days");
+					
+					listKeys.add(new SwKey(key, group, days));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return listKeys;
