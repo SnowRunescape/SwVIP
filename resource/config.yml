@@ -2,10 +2,31 @@
 # Plugin made by SnowRunescape
 # website https://snowdev.com.br
 
-MySQL:
+SwVIP:
+  server_name: 'SwVIP'
+  language: en
+  key_length: 10
+  
+database:
   Enable: false
-  Host: localhost
-  Port: 3306
-  User: root
-  Password: 123
-  Database: swvip
+  hostname: localhost
+  port: 3306
+  username: root
+  password: 123
+  database: swvip
+
+default_group: default
+cmd_set_group: 'pex user {player} group set {group}'
+cmd_add_group: 'pex user {player} group add {group}'
+cmd_remove_group: 'pex user {player} group remove {group}'
+vip_groups:
+  vip1:
+    prefix: '&6&lVIP'
+    commands:
+    - give {player} 264 64
+    - money give {player} 1000
+  vip2:
+    prefix: '&6&lVIP'
+    commands:
+    - give {player} 264 64
+    - money give {player} 1000

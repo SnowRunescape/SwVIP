@@ -12,6 +12,10 @@ commands:
         description: Shows the plugin commands.
         aliases: []
         usage: /<command>
+    keys:
+        description: List all keys.
+        aliases: []
+        usage: /<command>
     newkey:
         description: New key with X days for a given group.
         aliases: [gerarkey]

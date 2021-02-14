@@ -15,27 +15,27 @@ public class SwVIP implements CommandExecutor {
 		}
 		
 		if(sender.hasPermission("swvip.viptime") || sender.hasPermission("swvip.user") || sender.hasPermission("swvip.admin")) {
-			sender.sendMessage(Messaging.format("§b/tempovip §f- Mostra o ultimo dia de seu VIP..", false, false));
+			sender.sendMessage(Messaging.format("§b/tempovip §f- Mostra o ultimo dia de seu VIP.", false, false));
 		}
 		
 		if(sender.hasPermission("swvip.changevip") || sender.hasPermission("swvip.user") || sender.hasPermission("swvip.admin")) {
 			sender.sendMessage(Messaging.format("§b/trocarvip §f- Muda o VIP que você está usando.", false, false));
 		}
 		
-		if(sender.hasPermission("swvip.newkey") || sender.hasPermission("swvip.admin")) {
-			sender.sendMessage(Messaging.format("§b/gerarkey §f- Gera uma key com X dias de VIP.", false, false));
-		}
-		
 		if(sender.hasPermission("swvip.keys") || sender.hasPermission("swvip.admin")) {
 			sender.sendMessage(Messaging.format("§b/keys §f- Lista as keys disponiveis.", false, false));
 		}
 		
+		if(sender.hasPermission("swvip.newkey") || sender.hasPermission("swvip.admin")) {
+			sender.sendMessage(Messaging.format("§b/gerarkey §f- Gera uma key com X dias de VIP.", false, false));
+		}
+		
 		if(sender.hasPermission("swvip.delkey") || sender.hasPermission("swvip.admin")) {
-			sender.sendMessage(Messaging.format("§b/keys §f- Apaga apenas uma key.", false, false));
+			sender.sendMessage(Messaging.format("§b/apagarkey §f- Apaga apenas uma key.", false, false));
 		}
 		
 		if(sender.hasPermission("swvip.removevip") || sender.hasPermission("swvip.admin")) {
-			sender.sendMessage(Messaging.format("§b/tirarvip §f- Tira o VIP de um jogador.\"", false, false));
+			sender.sendMessage(Messaging.format("§b/tirarvip §f- Tira o VIP de um jogador.", false, false));
 		}
 		
 		return false;
