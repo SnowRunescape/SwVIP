@@ -66,7 +66,7 @@ public class NewKey implements CommandExecutor {
 				key = SwVIP.FormatKey();
 			}
 			
-			SwVIP.instance.getConfig().set("keys." + key, group + ", " + Integer.toString(days) + ", " + uses);
+			SwVIP.instance.getConfig().set("keys." + key, group + ", " + Integer.toString(days) + ", " + Integer.toString(uses));
 			SwVIP.instance.saveConfig();
 			SwVIP.instance.reloadConfig();
 			
