@@ -12,7 +12,7 @@ import br.com.snowdev.swvip.utilities.Messaging;
 @CommandPermissions({"swvip.admin", "swvip.keys"})
 public class NewKey implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if(args.length == 2){
+		if(args.length == 3){
 			String group = args[0];
 			
 			Boolean group_exists = false;
@@ -27,15 +27,17 @@ public class NewKey implements CommandExecutor {
 			
 			if(group_exists){
 				int days = Integer.parseInt(args[1]);
+				int uses = Integer.parseInt(args[2]);
 				
 				if(days > 0){
-					SwKey key = this.createNewKey(group, days);
+					SwKey key = this.createNewKey(group, days, uses);
 					
 					if(key != null) {
-						String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §fDias.";
+						String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §fDias [§a{key.uses} §fUsos].";
 						message.replace("{key.code}", key.code);
 						message.replace("{key.group}", key.group);
 						message.replace("{key.days}", String.valueOf(key.days));
+						message.replace("{key.uses}", String.valueOf(key.uses));
 						
 						sender.sendMessage(Messaging.format(message, true, false));
 					} else {
@@ -54,7 +56,7 @@ public class NewKey implements CommandExecutor {
 		return false;
 	}
 	
-	private SwKey createNewKey(String group, int days){
+	private SwKey createNewKey(String group, int days, int uses){
 		String key = SwVIP.FormatKey();
 		
 		if(SwVIP.flatFile){
@@ -62,11 +64,11 @@ public class NewKey implements CommandExecutor {
 				key = SwVIP.FormatKey();
 			}
 			
-			SwVIP.instance.getConfig().set("keys." + key, group + ", " + Integer.toString(days));
+			SwVIP.instance.getConfig().set("keys." + key, group + ", " + Integer.toString(days) + ", " + uses);
 			SwVIP.instance.saveConfig();
 			SwVIP.instance.reloadConfig();
 			
-			return new SwKey(key, group, days);
+			return new SwKey(key, group, days, uses);
 		} else {
 			//ThreadVZ nk = new ThreadVZ(plugin,"newkey",sender,grupo,dias,key);
 			//nk.start();
