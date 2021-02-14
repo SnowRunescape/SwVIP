@@ -1,5 +1,6 @@
 package br.com.snowdev.swvip.commands;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,23 +33,28 @@ public class NewKey implements CommandExecutor {
 					SwKey key = this.createNewKey(group, days);
 					
 					if(key != null) {
-						String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §fDias.";
+						String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §f{words.days}.";
+						message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
 						message.replace("{key.code}", key.code);
 						message.replace("{key.group}", key.group);
 						message.replace("{key.days}", String.valueOf(key.days));
 						
 						sender.sendMessage(Messaging.format(message, true, false));
 					} else {
-						//aconteceu um erro ao criar a key vip
+						sender.sendMessage(Messaging.format("error.internal_error", true, true));
 					}
 				} else {
-					//dias informado é invalido
+					sender.sendMessage(Messaging.format("error.days_invalid", true, true));
 				}
 			} else {
-				//grupo que esta tentando criar a key vip não existe
+				sender.sendMessage(Messaging.format("error.group_not_found", true, true));
 			}
 		} else {
-			//comando invalido, execute desse jeito...
+			String message = "§f/gerarkey <{words.group}> <{words.days}>";
+			message = message.replace("{words.days}", SwVIP.instance.ResourceMessage.getString("words.days"));
+			message = message.replace("{words.group}", SwVIP.instance.ResourceMessage.getString("words.group"));
+			
+			sender.sendMessage(Messaging.format(message, true, false));
 		}
 		
 		return false;

@@ -10,13 +10,13 @@ public class Messaging {
 		
 		if(message == null || message.isEmpty()) return "";
 		 
-		if(usePrefix) newMessage += SwVIP.instance.getConfig().getString("prefix", "&b[MineCart] ");
+		if(usePrefix) newMessage += SwVIP.instance.getConfig().getString("prefix", "&b[SwVIP] &f");
 		
 		 if(getConfigMessage){
 			 if(SwVIP.instance.ResourceMessage.getString(message) != null){
 				 newMessage += SwVIP.instance.ResourceMessage.getString(message);
 			 } else {
-				 newMessage = "§b[MineCart] §c" + message + " Not Found.";
+				 newMessage = "§b[SwVIP] §c" + message + " Not Found.";
 			 }
 		 } else {
 			 newMessage += message;

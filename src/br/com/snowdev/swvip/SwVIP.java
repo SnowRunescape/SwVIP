@@ -6,6 +6,7 @@ import java.util.Random;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.commands.MainCommand;
 
 public class SwVIP extends JavaPlugin {

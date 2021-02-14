@@ -1,0 +1,12 @@
+words:
+  days: 'dias'
+  group: 'grupo'
+  
+success:
+  
+
+error:
+  internal_error: 'Ocorreu um erro, tente novamente!'
+  group_not_found: 'Grupo nao encontrado!'
+  days_invalid: 'Dias informado é invalido!'
+  dont_have_keys: 'Nao ha keys!'
