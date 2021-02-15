@@ -30,8 +30,12 @@ public class SwVIP implements CommandExecutor {
 			sender.sendMessage(Messaging.format("§b/gerarkey §f- Gera uma key com X dias de VIP.", false, false));
 		}
 		
-		if(sender.hasPermission("swvip.delkey") || sender.hasPermission("swvip.admin")) {
+		if(sender.hasPermission("swvip.delelekey") || sender.hasPermission("swvip.admin")) {
 			sender.sendMessage(Messaging.format("§b/apagarkey §f- Apaga apenas uma key.", false, false));
+		}
+		
+		if(sender.hasPermission("swvip.givevip") || sender.hasPermission("swvip.admin")) {
+			sender.sendMessage(Messaging.format("§b/darvip §f- Da VIP sem o uso de uma key.", false, false));
 		}
 		
 		if(sender.hasPermission("swvip.removevip") || sender.hasPermission("swvip.admin")) {

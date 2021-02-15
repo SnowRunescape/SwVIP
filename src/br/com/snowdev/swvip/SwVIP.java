@@ -29,6 +29,7 @@ public class SwVIP extends JavaPlugin {
 		
 		getCommand("swvip").setExecutor(MainCommand);
 		getCommand("newkey").setExecutor(MainCommand);
+		getCommand("deletekey").setExecutor(MainCommand);
 		getCommand("usekey").setExecutor(MainCommand);
 		getCommand("viptime").setExecutor(MainCommand);
 		getCommand("changevip").setExecutor(MainCommand);

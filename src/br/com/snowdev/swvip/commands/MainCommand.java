@@ -19,6 +19,7 @@ public class MainCommand implements CommandExecutor {
 		CommandMap.put("swvip", new SwVIP());
 		CommandMap.put("keys", new Keys());
 		CommandMap.put("newkey", new NewKey());
+		CommandMap.put("deletekey", new DeleteKey());
 		CommandMap.put("usekey", new UseKey());
 		CommandMap.put("viptime", new VipTime());
 		CommandMap.put("changevip", new ChangeVip());
