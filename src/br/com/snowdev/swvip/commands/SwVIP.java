@@ -8,7 +8,7 @@ import br.com.snowdev.swvip.utilities.Messaging;
 
 public class SwVIP implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		sender.sendMessage(Messaging.format("§bComandos do SwVip:", true, false));
+		sender.sendMessage(Messaging.format("§bComandos do SwVIP:", true, false));
 		
 		if(sender.hasPermission("swvip.usekey") || sender.hasPermission("swvip.user") || sender.hasPermission("swvip.admin")) {
 			sender.sendMessage(Messaging.format("§b/usarkey §f- Utiliza uma key VIP.", false, false));

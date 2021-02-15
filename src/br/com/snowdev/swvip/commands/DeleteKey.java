@@ -18,7 +18,12 @@ public class DeleteKey implements CommandExecutor {
 			String key = args[0].toUpperCase();
 			
 			if(this.deleteKey(key)){
+				String message = SwVIP.instance.ResourceMessage.getString("success.delete_key");
+				message = message.replace("{key.code}", key);
 				
+				sender.sendMessage(Messaging.format(message, true, false));
+			} else {
+				sender.sendMessage(Messaging.format("error.internal_error", true, true));
 			}
 		} else {
 			String message = "§f/tirarvip <key>";
@@ -31,7 +36,7 @@ public class DeleteKey implements CommandExecutor {
 	
 	private Boolean deleteKey(String key){
 		if(SwVIP.flatFile){
-			if(SwVIP.instance.getConfig().contains("keys." + key)) {
+			if(SwVIP.instance.getConfig().contains("keys." + key)){
 				SwVIP.instance.getConfig().set("keys." + key, null);
 				SwVIP.instance.saveConfig();
 				SwVIP.instance.reloadConfig();
@@ -40,12 +45,12 @@ public class DeleteKey implements CommandExecutor {
 			}
 		} else {
 			try {
-				ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE key = ?", key);
+				ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE vip_key = ?", key);
 				
-				if(!rs.next()){
-					int rs2 = SwVIP.SQLManager().update("DELETE FROM swvip WHERE key = ?", key);
+				if(rs.next()){
+					int rs2 = SwVIP.SQLManager().update("DELETE FROM swvip WHERE vip_key = ?", key);
 					
-					if(rs2 == 1){
+					if(rs2 > 0){
 						return true;
 					}
 				}

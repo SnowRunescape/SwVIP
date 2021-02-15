@@ -12,6 +12,7 @@ import br.com.snowdev.swvip.SwKey;
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.interfaces.CommandPermissions;
 import br.com.snowdev.swvip.utilities.Messaging;
+import br.com.snowdev.swvip.utilities.ParserNumber;
 
 @CommandPermissions({"swvip.admin", "swvip.keys"})
 public class NewKey implements CommandExecutor {
@@ -21,7 +22,7 @@ public class NewKey implements CommandExecutor {
 			
 			Boolean group_exists = false;
 			
-			for(String iGroup : SwVIP.instance.getConfig().getStringList("vip_groups")){
+			for(String iGroup : SwVIP.instance.getConfig().getConfigurationSection("vip_groups").getKeys(false)){
 				if(iGroup.trim().equalsIgnoreCase(group)){
 					group_exists = true;
 					group = iGroup.trim();
@@ -30,17 +31,17 @@ public class NewKey implements CommandExecutor {
 			}
 			
 			if(group_exists){
-				int days = Integer.parseInt(args[1]);
+				int days = ParserNumber.parseInt(args[1]);
 				
 				if(days > 0){
 					SwKey key = this.createNewKey(group, days);
 					
-					if(key != null) {
+					if(key != null){
 						String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §f{words.days}.";
-						message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
-						message.replace("{key.code}", key.code);
-						message.replace("{key.group}", key.group);
-						message.replace("{key.days}", String.valueOf(key.days));
+						message = message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
+						message = message.replace("{key.code}", key.code);
+						message = message.replace("{key.group}", key.group);
+						message = message.replace("{key.days}", String.valueOf(key.days));
 						
 						sender.sendMessage(Messaging.format(message, true, false));
 					} else {
@@ -79,12 +80,12 @@ public class NewKey implements CommandExecutor {
 		} else {
 			try {
 				while(true){
-					ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE key = ?", key);
+					ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE vip_key = ?", key);
 					
 					if(!rs.next()){
-						int rs2 = SwVIP.SQLManager().update("INSERT INTO swvip VALUES (?, ?, ?)");
+						int rs2 = SwVIP.SQLManager().update("INSERT INTO swvip VALUES (?, ?, ?)", key, group, days);
 						
-						if(rs2 == 1){
+						if(rs2 > 0){
 							return new SwKey(key, group, days);
 						} else {
 							return null;

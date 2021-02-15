@@ -25,9 +25,15 @@ public class SwVIP extends JavaPlugin {
 		
 		this.loadMessages();
 		
+		if(SwVIP.instance.getConfig().getBoolean("database.enable")){
+			SwVIP.SQLManager();
+			SwVIP.flatFile =  false;
+		}
+		
 		MainCommand MainCommand = new MainCommand();
 		
 		getCommand("swvip").setExecutor(MainCommand);
+		getCommand("keys").setExecutor(MainCommand);
 		getCommand("newkey").setExecutor(MainCommand);
 		getCommand("deletekey").setExecutor(MainCommand);
 		getCommand("usekey").setExecutor(MainCommand);
@@ -40,9 +46,9 @@ public class SwVIP extends JavaPlugin {
 	public static String FormatKey(){
 		Random n = new Random();
 		
-		String key = "";
-		
 		int tmax = SwVIP.instance.getConfig().getInt("SwVIP.key_length");
+		
+		String key = "";
 		
 		if((tmax < 6) || (tmax > 12)){
 			tmax = 10;
@@ -57,9 +63,21 @@ public class SwVIP extends JavaPlugin {
 	
 	
     private void loadMessages(){
-    	File resourceMessage = new File(getDataFolder(), "messages.yml");
+    	String language = getConfig().getString("SwVIP.language", "en").trim();
     	
-    	if(!resourceMessage.exists()) saveResource("messages.yml", false);
+    	String fileLanguage = "language_" + language + ".yml";
+    	
+    	File resourceMessage = new File(getDataFolder(), fileLanguage);
+    	
+    	if(!resourceMessage.exists()){
+    		saveResource(fileLanguage, false);
+    	} else {
+    		resourceMessage = new File(getDataFolder(), "language_en.yml");
+    		
+    		if(!resourceMessage.exists()){
+    			saveResource("language_en.yml", false);
+    		}
+    	}
     	
     	this.ResourceMessage = YamlConfiguration.loadConfiguration(resourceMessage);
     }
@@ -69,9 +87,10 @@ public class SwVIP extends JavaPlugin {
 			String host = SwVIP.instance.getConfig().getString("database.host");
 			String user= SwVIP.instance.getConfig().getString("database.user");
 			String pass= SwVIP.instance.getConfig().getString("database.pass");
-			String db = SwVIP.instance.getConfig().getString("database.db");
+			String db = SwVIP.instance.getConfig().getString("database.database");
 			
 			SwVIP.SQLManager = new SQLManager(user, pass, host, db);
+			SwVIP.SQLManager.update("CREATE TABLE IF NOT EXISTS swvip (vip_key varchar(16) not null, vip_group varchar(32) not null, days int not null);");
 		}
 		
 		return SwVIP.SQLManager;

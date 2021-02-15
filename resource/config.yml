@@ -6,14 +6,13 @@ SwVIP:
   server_name: 'SwVIP'
   language: en
   key_length: 10
-  
+
 database:
-  Enable: false
-  hostname: localhost
-  port: 3306
-  username: root
-  password: 123
-  database: swvip
+  enable: false
+  host: localhost
+  user: root
+  pass: 123
+  database: minecraft_db
 
 default_group: default
 cmd_set_group: 'pex user {player} group set {group}'

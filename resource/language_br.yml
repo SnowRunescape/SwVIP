@@ -3,7 +3,7 @@ words:
   group: 'grupo'
   
 success:
-  
+  delete_key: 'Key {key.code} apagada.'
 
 error:
   internal_error: 'Ocorreu um erro, tente novamente!'

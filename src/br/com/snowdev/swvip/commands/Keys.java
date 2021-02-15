@@ -24,10 +24,10 @@ public class Keys implements CommandExecutor {
 			
 			for(SwKey key : keys){
 				String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §f{words.days}.";
-				message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
-				message.replace("{key.code}", key.code);
-				message.replace("{key.group}", key.group);
-				message.replace("{key.days}", String.valueOf(key.days));
+				message = message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
+				message = message.replace("{key.code}", key.code);
+				message = message.replace("{key.group}", key.group);
+				message = message.replace("{key.days}", String.valueOf(key.days));
 				
 				sender.sendMessage(Messaging.format(message, false, false));
 			}
@@ -59,8 +59,8 @@ public class Keys implements CommandExecutor {
 				ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip");
 				
 				while(rs.next()){
-					String key = rs.getString("key");
-					String group = rs.getString("group");
+					String key = rs.getString("vip_key");
+					String group = rs.getString("vip_group");
 					int days = rs.getInt("days");
 					
 					listKeys.add(new SwKey(key, group, days));

@@ -20,6 +20,10 @@ commands:
         description: New key with X days for a given group.
         aliases: [gerarkey]
         usage: /<command> <group> <days>
+    deletekey:
+        description: Delete one key.
+        aliases: [apagarkey]
+        usage: /<command> <key>
     usekey:
         description: Uses a VIP key.
         aliases: [usarkey]
