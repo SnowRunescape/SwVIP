@@ -1,9 +1,11 @@
 package br.com.snowdev.swvip;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.snowdev.swvip.SwVIP;
@@ -14,6 +16,8 @@ public class SwVIP extends JavaPlugin {
 	private static SQLManager SQLManager;
 	
 	public YamlConfiguration ResourceMessage;
+
+	public HashMap<String, String> using_codes = new HashMap<String, String>();
 	
 	public static Boolean flatFile = true;
 	public static SwVIP instance;
@@ -61,6 +65,9 @@ public class SwVIP extends JavaPlugin {
 		return key;
 	}
 	
+	public Boolean giveVIP(Player p, String Group, int days){
+		return false;
+	}
 	
     private void loadMessages(){
     	String language = getConfig().getString("SwVIP.language", "en").trim();

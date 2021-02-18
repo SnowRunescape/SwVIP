@@ -10,3 +10,5 @@ error:
   group_not_found: 'Grupo nao encontrado!'
   days_invalid: 'Dias informado é invalido!'
   dont_have_keys: 'Nao ha keys!'
+  key_not_found: 'Key nao encontrada!'
+  key_being_processed: 'Esta key esta sendo processada!'
