@@ -1,7 +1,7 @@
 words:
   days: 'dias'
   group: 'grupo'
-  
+
 success:
   delete_key: 'Key {key.code} apagada.'
 
