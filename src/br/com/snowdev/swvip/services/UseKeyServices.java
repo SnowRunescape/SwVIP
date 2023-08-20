@@ -10,21 +10,18 @@ import br.com.snowdev.swvip.utilities.Messaging;
 
 public class UseKeyServices
 {
-    public static void useKey(Player player, String key)
+    public static boolean useKey(Player player, String key)
     {
-        if (SwVIP.flatFile) {
-            UseKeyServices.useKeyFile(player, key);
-            return;
-        }
-
-        UseKeyServices.useKeyDatabase(player, key);
+        return SwVIP.flatFile ?
+            UseKeyServices.useKeyFile(player, key) :
+            UseKeyServices.useKeyDatabase(player, key);
     }
 
-    private static void useKeyFile(Player player, String key)
+    private static boolean useKeyFile(Player player, String key)
     {
         if (!SwVIP.instance.getConfig().contains("keys." + key)) {
             player.sendMessage(Messaging.format("error.key_not_found", true, true));
-            return;
+            return false;
         }
 
         String group = SwVIP.instance.getConfig().getString("keys." + key).split(",")[0].trim();
@@ -48,10 +45,12 @@ public class UseKeyServices
 
             SwVIP.instance.giveVIP(player, group, days);
         }
+
+        return true;
     }
 
-    private static void useKeyDatabase(Player player, String key)
+    private static boolean useKeyDatabase(Player player, String key)
     {
-
+        return false;
     }
 }

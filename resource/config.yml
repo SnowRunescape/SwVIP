@@ -18,6 +18,7 @@ default_group: default
 cmd_set_group: 'pex user {player} group set {group}'
 cmd_add_group: 'pex user {player} group add {group}'
 cmd_remove_group: 'pex user {player} group remove {group}'
+
 vip_groups:
   vip1:
     prefix: '&6&lVIP'

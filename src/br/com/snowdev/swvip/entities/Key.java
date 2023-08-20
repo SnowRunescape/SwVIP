@@ -1,12 +1,12 @@
-package br.com.snowdev.swvip;
+package br.com.snowdev.swvip.entities;
 
-public class SwKey
+public class Key
 {
     public String code;
     public String group;
     public int days;
 
-    public SwKey(String code, String group, int days)
+    public Key(String code, String group, int days)
     {
         this.code = code;
         this.group = group;

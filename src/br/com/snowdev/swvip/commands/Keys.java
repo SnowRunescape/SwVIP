@@ -5,8 +5,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import br.com.snowdev.swvip.SwKey;
 import br.com.snowdev.swvip.SwVIP;
+import br.com.snowdev.swvip.entities.Key;
 import br.com.snowdev.swvip.services.KeysServices;
 import br.com.snowdev.swvip.utilities.Messaging;
 
@@ -14,12 +14,12 @@ public class Keys implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        SwKey[] keys = KeysServices.getKeys();
+        Key[] keys = KeysServices.getKeys();
 
         if (keys.length > 0) {
             sender.sendMessage(Messaging.format("§fLista de keys:", true, false));
 
-            for (SwKey key : keys) {
+            for (Key key : keys) {
                 String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §f{words.days}.";
                 message = message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
                 message = message.replace("{key.code}", key.code);

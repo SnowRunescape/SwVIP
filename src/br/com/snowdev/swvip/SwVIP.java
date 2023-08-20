@@ -104,7 +104,7 @@ public class SwVIP extends JavaPlugin
 
             SwVIP.SQLManager = new SQLManager(user, pass, host, db);
 
-            br.com.snowdev.swvip.models.SwVIP.migrate();
+            br.com.snowdev.swvip.models.KeyModel.migrate();
         }
 
         return SwVIP.SQLManager;

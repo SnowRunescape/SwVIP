@@ -14,23 +14,25 @@ public class DeleteKey implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (args.length == 1) {
-            String key = args[0].toUpperCase();
-
-            if (DeleteKeyServices.deleteKey(key)) {
-                String message = SwVIP.instance.ResourceMessage.getString("success.delete_key");
-                message = message.replace("{key.code}", key);
-
-                sender.sendMessage(Messaging.format(message, true, false));
-            } else {
-                sender.sendMessage(Messaging.format("error.internal_error", true, true));
-            }
-        } else {
+        if (args.length != 1) {
             String message = "§f/tirarvip <key>";
 
             sender.sendMessage(Messaging.format(message, true, false));
+            return false;
         }
 
-        return false;
+        String key = args[0].toUpperCase();
+
+        if (!DeleteKeyServices.deleteKey(key)) {
+            sender.sendMessage(Messaging.format("error.internal_error", true, true));
+            return false;
+        }
+
+        String message = SwVIP.instance.ResourceMessage.getString("success.delete_key");
+        message = message.replace("{key.code}", key);
+
+        sender.sendMessage(Messaging.format(message, true, false));
+
+        return true;
     }
 }

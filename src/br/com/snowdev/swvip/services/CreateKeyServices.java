@@ -2,19 +2,19 @@ package br.com.snowdev.swvip.services;
 
 import java.sql.SQLException;
 
-import br.com.snowdev.swvip.SwKey;
 import br.com.snowdev.swvip.SwVIP;
+import br.com.snowdev.swvip.entities.Key;
 
 public class CreateKeyServices
 {
-    public static SwKey createKey(String group, int days)
+    public static Key createKey(String group, int days)
     {
         return SwVIP.flatFile ?
             CreateKeyServices.createKeyFile(group, days) :
             CreateKeyServices.createKeyDatabase(group, days);
     }
 
-    private static SwKey createKeyFile(String group, int days)
+    private static Key createKeyFile(String group, int days)
     {
         String key = SwVIP.FormatKey();
 
@@ -26,19 +26,19 @@ public class CreateKeyServices
         SwVIP.instance.saveConfig();
         SwVIP.instance.reloadConfig();
 
-        return new SwKey(key, group, days);
+        return new Key(key, group, days);
     }
 
-    private static SwKey createKeyDatabase(String group, int days)
+    private static Key createKeyDatabase(String group, int days)
     {
         String key = SwVIP.FormatKey();
 
         try {
             while (true) {
-                SwKey swkey = br.com.snowdev.swvip.models.SwVIP.findByKey(key);
+                Key swkey = br.com.snowdev.swvip.models.KeyModel.findByKey(key);
 
                 if (swkey == null) {
-                    return br.com.snowdev.swvip.models.SwVIP.create(key, group, days);
+                    return br.com.snowdev.swvip.models.KeyModel.create(key, group, days);
                 }
 
                 key = SwVIP.FormatKey();
