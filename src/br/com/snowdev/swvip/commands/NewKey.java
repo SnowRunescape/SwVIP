@@ -1,6 +1,5 @@
 package br.com.snowdev.swvip.commands;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.commons.lang.WordUtils;
@@ -83,16 +82,10 @@ public class NewKey implements CommandExecutor
         } else {
             try {
                 while (true) {
-                    ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE vip_key = ?", key);
+                    SwKey swkey = br.com.snowdev.swvip.models.SwVIP.findByKey(key);
 
-                    if (!rs.next()) {
-                        int rs2 = SwVIP.SQLManager().update("INSERT INTO swvip VALUES (?, ?, ?)", key, group, days);
-
-                        if (rs2 > 0) {
-                            return new SwKey(key, group, days);
-                        } else {
-                            return null;
-                        }
+                    if (swkey == null) {
+                        return br.com.snowdev.swvip.models.SwVIP.create(key, group, days);
                     }
 
                     key = SwVIP.FormatKey();

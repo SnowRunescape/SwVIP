@@ -1,12 +1,12 @@
 package br.com.snowdev.swvip.commands;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import br.com.snowdev.swvip.SwKey;
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.interfaces.CommandPermissions;
 import br.com.snowdev.swvip.utilities.Messaging;
@@ -48,14 +48,10 @@ public class DeleteKey implements CommandExecutor
             }
         } else {
             try {
-                ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE vip_key = ?", key);
+                SwKey swkey = br.com.snowdev.swvip.models.SwVIP.findByKey(key);
 
-                if (rs.next()) {
-                    int rs2 = SwVIP.SQLManager().update("DELETE FROM swvip WHERE vip_key = ?", key);
-
-                    if (rs2 > 0) {
-                        return true;
-                    }
+                if (swkey != null) {
+                    return br.com.snowdev.swvip.models.SwVIP.delete(key);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

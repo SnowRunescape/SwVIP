@@ -103,7 +103,8 @@ public class SwVIP extends JavaPlugin
             String db = SwVIP.instance.getConfig().getString("database.database");
 
             SwVIP.SQLManager = new SQLManager(user, pass, host, db);
-            SwVIP.SQLManager.update("CREATE TABLE IF NOT EXISTS swvip (vip_key VARCHAR(16) NOT NULL, vip_group VARCHAR(32) NOT NULL, days INT NOT NULL);");
+
+            br.com.snowdev.swvip.models.SwVIP.migrate();
         }
 
         return SwVIP.SQLManager;
