@@ -61,7 +61,7 @@ public class Keys implements CommandExecutor
             try {
                 ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip");
 
-                while(rs.next()){
+                while (rs.next()) {
                     String key = rs.getString("vip_key");
                     String group = rs.getString("vip_group");
                     int days = rs.getInt("days");

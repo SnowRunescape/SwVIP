@@ -31,7 +31,7 @@ public class SwVIP extends JavaPlugin
 
         this.loadMessages();
 
-        if(SwVIP.instance.getConfig().getBoolean("database.enable")){
+        if (SwVIP.instance.getConfig().getBoolean("database.enable")) {
             SwVIP.SQLManager();
             SwVIP.flatFile =  false;
         }
@@ -61,7 +61,7 @@ public class SwVIP extends JavaPlugin
             tmax = 10;
         }
 
-        for(int c = 0; c < tmax; c++){
+        for (int c = 0; c < tmax; c++) {
             key += String.valueOf(n.nextInt(10));
         }
 

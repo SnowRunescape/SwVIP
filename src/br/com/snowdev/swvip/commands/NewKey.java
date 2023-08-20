@@ -71,7 +71,7 @@ public class NewKey implements CommandExecutor
         String key = SwVIP.FormatKey();
 
         if (SwVIP.flatFile) {
-            while(SwVIP.instance.getConfig().contains("keys." + key)){
+            while (SwVIP.instance.getConfig().contains("keys." + key)) {
                 key = SwVIP.FormatKey();
             }
 
@@ -82,13 +82,13 @@ public class NewKey implements CommandExecutor
             return new SwKey(key, group, days);
         } else {
             try {
-                while(true){
+                while (true) {
                     ResultSet rs = SwVIP.SQLManager().select("SELECT * FROM swvip WHERE vip_key = ?", key);
 
                     if (!rs.next()) {
                         int rs2 = SwVIP.SQLManager().update("INSERT INTO swvip VALUES (?, ?, ?)", key, group, days);
 
-                        if(rs2 > 0){
+                        if (rs2 > 0) {
                             return new SwKey(key, group, days);
                         } else {
                             return null;

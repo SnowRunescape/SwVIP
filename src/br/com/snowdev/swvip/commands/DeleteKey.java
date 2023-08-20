@@ -53,11 +53,11 @@ public class DeleteKey implements CommandExecutor
                 if (rs.next()) {
                     int rs2 = SwVIP.SQLManager().update("DELETE FROM swvip WHERE vip_key = ?", key);
 
-                    if(rs2 > 0){
+                    if (rs2 > 0) {
                         return true;
                     }
                 }
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
