@@ -16,7 +16,7 @@ public class UseKey implements CommandExecutor {
     {
         Player p = (Player) sender;
 
-        if (args.length==1) {
+        if (args.length == 1) {
             String key = args[0].toUpperCase();
 
             if (!SwVIP.instance.using_codes.containsKey(key)) {

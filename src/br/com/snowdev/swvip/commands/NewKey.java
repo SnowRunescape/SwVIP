@@ -1,7 +1,5 @@
 package br.com.snowdev.swvip.commands;
 
-import java.sql.SQLException;
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import br.com.snowdev.swvip.SwKey;
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.interfaces.CommandPermissions;
+import br.com.snowdev.swvip.services.CreateKeyServices;
 import br.com.snowdev.swvip.utilities.Messaging;
 import br.com.snowdev.swvip.utilities.ParserNumber;
 
@@ -35,7 +34,7 @@ public class NewKey implements CommandExecutor
                 int days = ParserNumber.parseInt(args[1]);
 
                 if (days > 0) {
-                    SwKey key = this.createNewKey(group, days);
+                    SwKey key = CreateKeyServices.createKey(group, days);
 
                     if (key != null) {
                         String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §f{words.days}.";
@@ -63,38 +62,5 @@ public class NewKey implements CommandExecutor
         }
 
         return false;
-    }
-
-    private SwKey createNewKey(String group, int days)
-    {
-        String key = SwVIP.FormatKey();
-
-        if (SwVIP.flatFile) {
-            while (SwVIP.instance.getConfig().contains("keys." + key)) {
-                key = SwVIP.FormatKey();
-            }
-
-            SwVIP.instance.getConfig().set("keys." + key, group + ", " + Integer.toString(days));
-            SwVIP.instance.saveConfig();
-            SwVIP.instance.reloadConfig();
-
-            return new SwKey(key, group, days);
-        } else {
-            try {
-                while (true) {
-                    SwKey swkey = br.com.snowdev.swvip.models.SwVIP.findByKey(key);
-
-                    if (swkey == null) {
-                        return br.com.snowdev.swvip.models.SwVIP.create(key, group, days);
-                    }
-
-                    key = SwVIP.FormatKey();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
     }
 }
