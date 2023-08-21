@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.entities.Key;
+import br.com.snowdev.swvip.models.KeyModel;
 
 public class CreateKeyServices
 {
@@ -35,10 +36,10 @@ public class CreateKeyServices
 
         try {
             while (true) {
-                Key swkey = br.com.snowdev.swvip.models.KeyModel.findByKey(key);
+                Key swkey = KeyModel.findByKey(key);
 
                 if (swkey == null) {
-                    return br.com.snowdev.swvip.models.KeyModel.create(key, group, days);
+                    return KeyModel.create(key, group, days);
                 }
 
                 key = SwVIP.FormatKey();

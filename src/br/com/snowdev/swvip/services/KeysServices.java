@@ -7,6 +7,7 @@ import java.util.Set;
 
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.entities.Key;
+import br.com.snowdev.swvip.models.KeyModel;
 
 public class KeysServices
 {
@@ -40,7 +41,7 @@ public class KeysServices
     private static Key[] getKeysDatabase()
     {
         try {
-            return br.com.snowdev.swvip.models.KeyModel.all();
+            return KeyModel.all();
         } catch (SQLException e) {
             e.printStackTrace();
         }

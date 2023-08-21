@@ -10,6 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.commands.MainCommand;
+import br.com.snowdev.swvip.models.KeyModel;
+import br.com.snowdev.swvip.models.VipModel;
 import br.com.snowdev.swvip.storage.SQLManager;
 
 public class SwVIP extends JavaPlugin
@@ -104,7 +106,8 @@ public class SwVIP extends JavaPlugin
 
             SwVIP.SQLManager = new SQLManager(user, pass, host, db);
 
-            br.com.snowdev.swvip.models.KeyModel.migrate();
+            KeyModel.migrate();
+            VipModel.migrate();
         }
 
         return SwVIP.SQLManager;

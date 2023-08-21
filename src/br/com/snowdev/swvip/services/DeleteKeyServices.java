@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.entities.Key;
+import br.com.snowdev.swvip.models.KeyModel;
 
 public class DeleteKeyServices
 {
@@ -30,10 +31,10 @@ public class DeleteKeyServices
     private static boolean deleteKeyDatabase(String key)
     {
         try {
-            Key swkey = br.com.snowdev.swvip.models.KeyModel.findByKey(key);
+            Key swkey = KeyModel.findByKey(key);
 
             if (swkey != null) {
-                return br.com.snowdev.swvip.models.KeyModel.delete(key);
+                return KeyModel.delete(key);
             }
         } catch (SQLException e) {
             e.printStackTrace();
