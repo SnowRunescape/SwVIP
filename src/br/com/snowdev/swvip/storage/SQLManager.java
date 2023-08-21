@@ -86,7 +86,7 @@ public class SQLManager
         return null;
     }
 
-    public synchronized ResultSet select(String query,Object... replacers)
+    public synchronized ResultSet select(String query, Object... replacers)
     {
         startQuery();
 
