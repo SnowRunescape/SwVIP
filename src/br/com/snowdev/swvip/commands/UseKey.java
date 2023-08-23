@@ -12,6 +12,11 @@ import br.com.snowdev.swvip.utilities.Messaging;
 public class UseKey implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(Messaging.format("error.cmd_only_player", true, true));
+            return false;
+        }
+
         Player player = (Player) sender;
 
         if (args.length != 1) {
