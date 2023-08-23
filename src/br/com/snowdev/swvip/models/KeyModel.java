@@ -16,7 +16,7 @@ public class KeyModel
 
     public static Key create(String key, String group, int days)
     {
-        int rs = br.com.snowdev.swvip.SwVIP.SQLManager().update("INSERT INTO sw_keys VALUES (?, ?, ?)", key, group, days);
+        int rs = br.com.snowdev.swvip.SwVIP.SQLManager().update("INSERT INTO `sw_keys` (`key`, `group`, `days`) VALUES (?, ?, ?)", key, group, days);
 
         if (rs < 1) {
             return null;
@@ -27,21 +27,21 @@ public class KeyModel
 
     public static boolean delete(String key)
     {
-        int rs = br.com.snowdev.swvip.SwVIP.SQLManager().update("DELETE FROM sw_keys WHERE vip_key = ?", key);
+        int rs = br.com.snowdev.swvip.SwVIP.SQLManager().update("DELETE FROM `sw_keys` WHERE `key` = ?", key);
 
         return (rs > 0);
     }
 
     public static Key findByKey(String key) throws SQLException
     {
-        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM sw_keys WHERE vip_key = ?", key);
+        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_keys` WHERE `key` = ?", key);
 
         if (!rs.next()) {
             return null;
         }
 
         return new Key(
-            rs.getString("vip_key"),
+            rs.getString("key"),
             rs.getString("group"),
             rs.getInt("days")
         );
@@ -51,11 +51,11 @@ public class KeyModel
     {
         List<Key> swKeysList = new ArrayList<Key>();
 
-        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM sw_keys");
+        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_keys`");
 
         while (rs.next()) {
             Key swKey = new Key(
-                rs.getString("vip_key"),
+                rs.getString("key"),
                 rs.getString("group"),
                 rs.getInt("days")
             );
