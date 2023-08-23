@@ -1,8 +1,10 @@
 package br.com.snowdev.swvip.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.interfaces.CommandPermissions;
@@ -22,6 +24,8 @@ public class GiveVip implements CommandExecutor
         }
 
         String username = args[0].toLowerCase();
+        
+        Player player = Bukkit.getPlayer(username);
         String group = args[1];
         int days = ParserNumber.parseInt(args[2]);
 
