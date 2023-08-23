@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SQLManager
 {
@@ -86,16 +87,11 @@ public class SQLManager
         return null;
     }
 
-    public synchronized ResultSet select(String query, Object... replacers)
+    public synchronized ResultSet select(String query, Object... replacers) throws SQLException
     {
         startQuery();
 
-        try {
-            return query(query, replacers).executeQuery();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return query(query, replacers).executeQuery();
     }
 
     public synchronized void startQuery()
