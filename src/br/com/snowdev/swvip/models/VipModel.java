@@ -18,7 +18,7 @@ public class VipModel
     {
         List<Vip> swKeysList = new ArrayList<Vip>();
 
-        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM sw_vips WHERE username = ?", username);
+        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_vips` WHERE `username` = ?", username);
 
         while (rs.next()) {
             Vip swKey = new Vip(
