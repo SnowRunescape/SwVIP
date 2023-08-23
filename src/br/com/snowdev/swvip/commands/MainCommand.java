@@ -31,16 +31,20 @@ public class MainCommand implements CommandExecutor
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        Player player = (Player) sender;
+
         commandLabel = commandLabel.toLowerCase();
 
         if (CommandMap.containsKey(commandLabel)) {
             CommandExecutor command = CommandMap.get(commandLabel);
 
-            if (!hasPermission(player, command)) {
-                player.sendMessage(Messaging.format("error.insufficient-permissions", true, true));
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
 
-                return true;
+                if (!hasPermission(player, command)) {
+                    player.sendMessage(Messaging.format("error.insufficient-permissions", true, true));
+
+                    return false;
+                }
             }
 
             return command.onCommand(sender, cmd, commandLabel, args);
