@@ -11,7 +11,7 @@ public class VipModel
 {
     public static void migrate()
     {
-        br.com.snowdev.swvip.SwVIP.SQLManager().update("CREATE TABLE IF NOT EXISTS sw_vips (vip_key VARCHAR(16) NOT NULL, group VARCHAR(32) NOT NULL, days INT NOT NULL);");
+        br.com.snowdev.swvip.SwVIP.SQLManager().update("CREATE TABLE IF NOT EXISTS `sw_vips` (`id` INT AUTO_INCREMENT PRIMARY KEY, `vip_key` VARCHAR(16) NOT NULL, `group` VARCHAR(32) NOT NULL, `days` INT NOT NULL, `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP, `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);");
     }
 
     public static Vip[] getAllByUsername(String username) throws SQLException
