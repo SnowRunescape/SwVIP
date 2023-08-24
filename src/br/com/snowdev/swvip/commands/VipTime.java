@@ -15,6 +15,11 @@ public class VipTime implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(Messaging.format("error.cmd_only_player", true, true));
+            return false;
+        }
+
         Player player = (Player) sender;
 
         try {
@@ -28,7 +33,7 @@ public class VipTime implements CommandExecutor
             sender.sendMessage(Messaging.format("§fLista de keys:", true, false));
 
             for (Vip vip : vips) {
-                player.sendMessage("§f" + vip + " - " + vip + " Dias");
+                player.sendMessage("§f" + vip.group + " - " + vip + " Dias");
             }
         } catch (SQLException e) {
             e.printStackTrace();
