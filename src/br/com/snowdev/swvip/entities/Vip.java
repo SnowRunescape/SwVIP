@@ -2,8 +2,14 @@ package br.com.snowdev.swvip.entities;
 
 public class Vip
 {
-    public Vip(String code, String group, int days)
-    {
+    public int id;
+    public String username;
+    public String group;
 
+    public Vip(int id, String username, String group)
+    {
+        this.id = id;
+        this.username = username;
+        this.group = group;
     }
 }

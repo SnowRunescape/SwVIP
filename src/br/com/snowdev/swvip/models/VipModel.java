@@ -11,7 +11,7 @@ public class VipModel
 {
     public static void migrate()
     {
-        br.com.snowdev.swvip.SwVIP.SQLManager().update("CREATE TABLE IF NOT EXISTS `sw_vips` (`id` INT AUTO_INCREMENT PRIMARY KEY, `vip_key` VARCHAR(16) NOT NULL, `group` VARCHAR(32) NOT NULL, `days` INT NOT NULL, `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP, `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);");
+        br.com.snowdev.swvip.SwVIP.SQLManager().update("CREATE TABLE IF NOT EXISTS `sw_vips` (`id` INT AUTO_INCREMENT PRIMARY KEY, `username` VARCHAR(16) NOT NULL, `group` VARCHAR(32) NOT NULL, `expires_at` DATETIME NOT NULL, `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP, `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);");
     }
 
     public static Vip[] getAllByUsername(String username) throws SQLException
@@ -22,9 +22,9 @@ public class VipModel
 
         while (rs.next()) {
             Vip swKey = new Vip(
-                rs.getString("vip_key"),
-                rs.getString("group"),
-                rs.getInt("days")
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getString("group")
             );
 
             swKeysList.add(swKey);
