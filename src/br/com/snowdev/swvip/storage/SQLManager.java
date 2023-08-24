@@ -28,14 +28,14 @@ public class SQLManager
     public Connection getNewConnection() throws Exception
     {
         return DriverManager.getConnection(
-                type + host + ":" + port + "/" + database, user, pass);
+                this.type + this.host + ":" + this.port + "/" + this.database, this.user, this.pass);
     }
 
     public synchronized void openConnection()
     {
         try {
-            if (!hasConnection()) {
-                connection = getNewConnection();
+            if (!this.hasConnection()) {
+                this.connection = this.getNewConnection();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,25 +44,25 @@ public class SQLManager
 
     public synchronized boolean hasModifications()
     {
-        return modications > 0;
+        return this.modications > 0;
     }
 
     public synchronized Connection getConnection()
     {
-        return connection;
+        return this.connection;
     }
 
     public synchronized int update(String query, Object... replacers)
     {
-        startQuery();
+        this.startQuery();
 
         try {
-            return query(query, replacers).executeUpdate();
+            return this.query(query, replacers).executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         } finally {
-            endQuery();
+            this.endQuery();
         }
     }
 
@@ -79,7 +79,7 @@ public class SQLManager
                 query += ";";
             }
 
-            return connection.prepareStatement(query);
+            return this.connection.prepareStatement(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,34 +89,34 @@ public class SQLManager
 
     public synchronized ResultSet select(String query, Object... replacers) throws SQLException
     {
-        startQuery();
+        this.startQuery();
 
-        return query(query, replacers).executeQuery();
+        return this.query(query, replacers).executeQuery();
     }
 
     public synchronized void startQuery()
     {
-        openConnection();
-        modications++;
+        this.openConnection();
+        this.modications++;
     }
 
     public synchronized void endQuery()
     {
-        modications--;
-        closeConnection();
+        this.modications--;
+        this.closeConnection();
     }
 
     public synchronized boolean hasConnection()
     {
-        return connection != null;
+        return this.connection != null;
     }
 
     public synchronized void closeConnection()
     {
         try {
             if (hasConnection() && !hasModifications()) {
-                connection.close();
-                connection = null;
+                this.connection.close();
+                this.connection = null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,6 +126,7 @@ public class SQLManager
     public SQLManager(String user, String pass, String host, String database)
     {
         super();
+
         this.user = user;
         this.pass = pass;
         this.host = host;
@@ -134,7 +135,7 @@ public class SQLManager
 
     public String getUser()
     {
-        return user;
+        return this.user;
     }
 
     public void setUser(String user)
@@ -144,7 +145,7 @@ public class SQLManager
 
     public String getPass()
     {
-        return pass;
+        return this.pass;
     }
 
     public void setPass(String pass)
@@ -154,7 +155,7 @@ public class SQLManager
 
     public String getHost()
     {
-        return host;
+        return this.host;
     }
 
     public void setHost(String host)
@@ -164,7 +165,7 @@ public class SQLManager
 
     public String getPort()
     {
-        return port;
+        return this.port;
     }
 
     public void setPort(String port)
@@ -174,7 +175,7 @@ public class SQLManager
 
     public String getDatabase()
     {
-        return database;
+        return this.database;
     }
 
     public void setDatabase(String database)
@@ -184,7 +185,7 @@ public class SQLManager
 
     public String getType()
     {
-        return type;
+        return this.type;
     }
 
     public void setType(String type)
