@@ -13,7 +13,6 @@ public class SQLManager
     private String host = "localhost";
     private String port = "3306";
     private String database = "teste";
-    private String type = "jdbc:mysql://";
     private Connection connection;
     private int modications = 0;
 
@@ -27,8 +26,9 @@ public class SQLManager
 
     public Connection getNewConnection() throws Exception
     {
-        return DriverManager.getConnection(
-                this.type + this.host + ":" + this.port + "/" + this.database, this.user, this.pass);
+        String connectionUri = String.format("jdbc:mysql://%s:%d/%s", this.host, this.port, this.database);
+
+        return DriverManager.getConnection(connectionUri, this.user, this.pass);
     }
 
     public synchronized void openConnection()
@@ -181,15 +181,5 @@ public class SQLManager
     public void setDatabase(String database)
     {
         this.database = database;
-    }
-
-    public String getType()
-    {
-        return this.type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
     }
 }
