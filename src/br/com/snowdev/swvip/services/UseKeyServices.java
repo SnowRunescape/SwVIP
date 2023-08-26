@@ -43,7 +43,7 @@ public class UseKeyServices
             SwVIP.instance.getConfig().set("vips." + player.getName() + "." + group, days);
             SwVIP.instance.saveConfig();
 
-            SwVIP.instance.giveVIP(player, group, days);
+            GiveVipService.giveVIP(player, group, days);
         }
 
         return true;

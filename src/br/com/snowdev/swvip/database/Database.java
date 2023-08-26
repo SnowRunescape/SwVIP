@@ -1,4 +1,4 @@
-package br.com.snowdev.swvip.storage;
+package br.com.snowdev.swvip.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SQLManager
+public class Database
 {
     private String user = "root";
     private String pass = "vertrigo";
@@ -123,7 +123,7 @@ public class SQLManager
         }
     }
 
-    public SQLManager(String user, String pass, String host, String database)
+    public Database(String user, String pass, String host, String database)
     {
         super();
 

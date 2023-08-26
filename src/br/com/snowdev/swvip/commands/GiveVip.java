@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.interfaces.CommandPermissions;
+import br.com.snowdev.swvip.services.GiveVipService;
 import br.com.snowdev.swvip.utilities.Messaging;
 import br.com.snowdev.swvip.utilities.ParserNumber;
 
@@ -29,7 +29,7 @@ public class GiveVip implements CommandExecutor
         String group = args[1];
         int days = ParserNumber.parseInt(args[2]);
 
-        if (!SwVIP.instance.giveVIP(player, group, days)) {
+        if (!GiveVipService.giveVIP(player, group, days)) {
             sender.sendMessage(Messaging.format("Erro ao dar o Vip", true, false));
             return false;
         }

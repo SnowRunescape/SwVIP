@@ -3,17 +3,16 @@ package br.com.snowdev.swvip;
 import java.util.HashMap;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.snowdev.swvip.SwVIP;
+import br.com.snowdev.swvip.database.Database;
 import br.com.snowdev.swvip.models.KeyModel;
 import br.com.snowdev.swvip.models.VipModel;
-import br.com.snowdev.swvip.storage.SQLManager;
 
 public class SwVIP extends JavaPlugin
 {
-    private static SQLManager SQLManager;
+    private static Database SQLManager;
 
     public YamlConfiguration ResourceMessage;
 
@@ -29,12 +28,7 @@ public class SwVIP extends JavaPlugin
         (new OnEnable()).enabled();
     }
 
-    public Boolean giveVIP(Player p, String Group, int days)
-    {
-        return false;
-    }
-
-    public static SQLManager SQLManager()
+    public static Database SQLManager()
     {
         if (SwVIP.SQLManager == null) {
             String host = SwVIP.instance.getConfig().getString("database.host");
@@ -42,7 +36,7 @@ public class SwVIP extends JavaPlugin
             String pass = SwVIP.instance.getConfig().getString("database.pass");
             String db = SwVIP.instance.getConfig().getString("database.database");
 
-            SwVIP.SQLManager = new SQLManager(user, pass, host, db);
+            SwVIP.SQLManager = new Database(user, pass, host, db);
 
             KeyModel.migrate();
             VipModel.migrate();
