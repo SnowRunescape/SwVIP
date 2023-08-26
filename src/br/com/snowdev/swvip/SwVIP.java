@@ -1,6 +1,5 @@
 package br.com.snowdev.swvip;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -9,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.snowdev.swvip.SwVIP;
-import br.com.snowdev.swvip.commands.MainCommand;
 import br.com.snowdev.swvip.models.KeyModel;
 import br.com.snowdev.swvip.models.VipModel;
 import br.com.snowdev.swvip.storage.SQLManager;
@@ -29,31 +27,12 @@ public class SwVIP extends JavaPlugin
     {
         instance = this;
 
-        if(!new File(getDataFolder(), "config.yml").exists()) saveDefaultConfig();
-
-        this.loadMessages();
-
-        if (SwVIP.instance.getConfig().getBoolean("database.enable")) {
-            SwVIP.SQLManager();
-            SwVIP.flatFile =  false;
-        }
-
-        MainCommand MainCommand = new MainCommand();
-
-        getCommand("swvip").setExecutor(MainCommand);
-        getCommand("keys").setExecutor(MainCommand);
-        getCommand("newkey").setExecutor(MainCommand);
-        getCommand("deletekey").setExecutor(MainCommand);
-        getCommand("usekey").setExecutor(MainCommand);
-        getCommand("viptime").setExecutor(MainCommand);
-        getCommand("changevip").setExecutor(MainCommand);
-        getCommand("givevip").setExecutor(MainCommand);
-        getCommand("removevip").setExecutor(MainCommand);
+        (new OnEnable()).enabled();
     }
 
     public static String FormatKey()
     {
-        Random n = new Random();
+        Random random = new Random();
 
         int tmax = SwVIP.instance.getConfig().getInt("SwVIP.key_length");
 
@@ -64,7 +43,7 @@ public class SwVIP extends JavaPlugin
         }
 
         for (int c = 0; c < tmax; c++) {
-            key += String.valueOf(n.nextInt(10));
+            key += String.valueOf(random.nextInt(10));
         }
 
         return key;
@@ -73,27 +52,6 @@ public class SwVIP extends JavaPlugin
     public Boolean giveVIP(Player p, String Group, int days)
     {
         return false;
-    }
-
-    private void loadMessages()
-    {
-        String language = getConfig().getString("SwVIP.language", "en").trim();
-
-        String fileLanguage = "language_" + language + ".yml";
-
-        File resourceMessage = new File(getDataFolder(), fileLanguage);
-
-        if (!resourceMessage.exists()) {
-            saveResource(fileLanguage, false);
-        } else {
-            resourceMessage = new File(getDataFolder(), "language_en.yml");
-
-            if (!resourceMessage.exists()) {
-                saveResource("language_en.yml", false);
-            }
-        }
-
-        this.ResourceMessage = YamlConfiguration.loadConfiguration(resourceMessage);
     }
 
     public static SQLManager SQLManager()
