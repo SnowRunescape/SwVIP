@@ -23,8 +23,11 @@ public class RemoveVip implements CommandExecutor
         String player = args[0].toLowerCase();
 
         if (!RemoveVipServices.removeVip(player)) {
-            String message = "§f/Falha ao remover o VIP do jogador " + player;
-            sender.sendMessage(Messaging.format(message, true, false));
+            String message = Messaging.format("error.remove_vip", true, true);
+            message = message.replace("{player}", player);
+
+            sender.sendMessage(message);
+
             return false;
         }
 

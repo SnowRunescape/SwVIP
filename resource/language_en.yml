@@ -13,3 +13,4 @@ error:
   dont_have_keys: 'There are no keys!'
   key_not_found: 'Key not found!'
   key_being_processed: 'This key is being processed!'
+  remove_vip: 'Failed to remove VIP from player {player}.'
