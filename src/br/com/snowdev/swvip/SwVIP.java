@@ -1,7 +1,6 @@
 package br.com.snowdev.swvip;
 
 import java.util.HashMap;
-import java.util.Random;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -28,25 +27,6 @@ public class SwVIP extends JavaPlugin
         instance = this;
 
         (new OnEnable()).enabled();
-    }
-
-    public static String FormatKey()
-    {
-        Random random = new Random();
-
-        int tmax = SwVIP.instance.getConfig().getInt("SwVIP.key_length");
-
-        String key = "";
-
-        if ((tmax < 6) || (tmax > 12)) {
-            tmax = 10;
-        }
-
-        for (int c = 0; c < tmax; c++) {
-            key += String.valueOf(random.nextInt(10));
-        }
-
-        return key;
     }
 
     public Boolean giveVIP(Player p, String Group, int days)

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import br.com.snowdev.swvip.SwVIP;
 import br.com.snowdev.swvip.entities.Key;
 import br.com.snowdev.swvip.models.KeyModel;
+import br.com.snowdev.swvip.utilities.KeyHelper;
 
 public class CreateKeyServices
 {
@@ -17,10 +18,10 @@ public class CreateKeyServices
 
     private static Key createKeyFile(String group, int days)
     {
-        String key = SwVIP.FormatKey();
+        String key = KeyHelper.genKey();
 
         while (SwVIP.instance.getConfig().contains("keys." + key)) {
-            key = SwVIP.FormatKey();
+            key = KeyHelper.genKey();
         }
 
         SwVIP.instance.getConfig().set("keys." + key, group + ", " + Integer.toString(days));
@@ -32,7 +33,7 @@ public class CreateKeyServices
 
     private static Key createKeyDatabase(String group, int days)
     {
-        String key = SwVIP.FormatKey();
+        String key = KeyHelper.genKey();
 
         try {
             while (true) {
@@ -42,7 +43,7 @@ public class CreateKeyServices
                     return KeyModel.create(key, group, days);
                 }
 
-                key = SwVIP.FormatKey();
+                key = KeyHelper.genKey();
             }
         } catch (SQLException e) {
             e.printStackTrace();
