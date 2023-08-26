@@ -26,7 +26,7 @@ public class VipTime implements CommandExecutor
             Vip[] vips = VipModel.getAllByUsername(player.getName());
 
             if (vips.length < 1) {
-                player.sendMessage("Você não tem nenhum VIP.");
+                player.sendMessage(Messaging.format("error.dont_have_vip", true, true));
                 return true;
             }
 
