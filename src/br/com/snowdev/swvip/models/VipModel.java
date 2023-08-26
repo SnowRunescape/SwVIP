@@ -16,20 +16,14 @@ public class VipModel
 
     public static Vip[] getAllByUsername(String username) throws SQLException
     {
-        List<Vip> swKeysList = new ArrayList<Vip>();
+        List<Vip> vips = new ArrayList<Vip>();
 
-        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_vips` WHERE `username` = ?", username);
+        ResultSet result = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_vips` WHERE `username` = ?", username);
 
-        while (rs.next()) {
-            Vip swKey = new Vip(
-                rs.getInt("id"),
-                rs.getString("username"),
-                rs.getString("group")
-            );
-
-            swKeysList.add(swKey);
+        while (result.next()) {
+            vips.add(Vip.buildFromResultSet(result));
         }
 
-        return swKeysList.toArray(new Vip[0]);
+        return vips.toArray(new Vip[0]);
     }
 }

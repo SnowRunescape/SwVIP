@@ -1,5 +1,8 @@
 package br.com.snowdev.swvip.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Key
 {
     public String code;
@@ -11,5 +14,14 @@ public class Key
         this.code = code;
         this.group = group;
         this.days = days;
+    }
+
+    public static Key buildFromResultSet(ResultSet result) throws SQLException
+    {
+        return new Key(
+            result.getString("key"),
+            result.getString("group"),
+            result.getInt("days")
+        );
     }
 }

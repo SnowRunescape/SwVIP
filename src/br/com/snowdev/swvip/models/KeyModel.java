@@ -34,35 +34,25 @@ public class KeyModel
 
     public static Key findByKey(String key) throws SQLException
     {
-        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_keys` WHERE `key` = ?", key);
+        ResultSet result = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_keys` WHERE `key` = ?", key);
 
-        if (!rs.next()) {
+        if (!result.next()) {
             return null;
         }
 
-        return new Key(
-            rs.getString("key"),
-            rs.getString("group"),
-            rs.getInt("days")
-        );
+        return Key.buildFromResultSet(result);
     }
 
     public static Key[] all() throws SQLException
     {
-        List<Key> swKeysList = new ArrayList<Key>();
+        List<Key> keys = new ArrayList<Key>();
 
-        ResultSet rs = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_keys`");
+        ResultSet result = br.com.snowdev.swvip.SwVIP.SQLManager().select("SELECT * FROM `sw_keys`");
 
-        while (rs.next()) {
-            Key swKey = new Key(
-                rs.getString("key"),
-                rs.getString("group"),
-                rs.getInt("days")
-            );
-
-            swKeysList.add(swKey);
+        while (result.next()) {
+            keys.add(Key.buildFromResultSet(result));
         }
 
-        return swKeysList.toArray(new Key[0]);
+        return keys.toArray(new Key[0]);
     }
 }
