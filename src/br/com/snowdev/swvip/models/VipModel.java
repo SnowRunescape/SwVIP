@@ -14,6 +14,17 @@ public class VipModel
         br.com.snowdev.swvip.SwVIP.SQLManager().update("CREATE TABLE IF NOT EXISTS `sw_vips` (`id` INT AUTO_INCREMENT PRIMARY KEY, `username` VARCHAR(16) NOT NULL, `group` VARCHAR(32) NOT NULL, `expires_at` DATETIME NOT NULL, `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP, `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);");
     }
 
+    public static Vip createOrUpdate(String username, String group, String expiresAt)
+    {
+        int rs = br.com.snowdev.swvip.SwVIP.SQLManager().update("INSERT INTO `sw_vips` (`username`, `group`, `expires_at`) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE `expires_at` = VALUES(`expires_at`)", username, group, expiresAt);
+
+        if (rs < 1) {
+            return null;
+        }
+
+        return new Vip(0, username, group);
+    }
+
     public static Vip[] getAllByUsername(String username) throws SQLException
     {
         List<Vip> vips = new ArrayList<Vip>();

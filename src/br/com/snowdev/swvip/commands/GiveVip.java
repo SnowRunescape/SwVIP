@@ -24,12 +24,12 @@ public class GiveVip implements CommandExecutor
         }
 
         String username = args[0].toLowerCase();
-        
+
         Player player = Bukkit.getPlayer(username);
         String group = args[1];
         int days = ParserNumber.parseInt(args[2]);
 
-        if (!GiveVipService.giveVIP(player, group, days)) {
+        if (GiveVipService.giveVIP(player, group, days) != null) {
             sender.sendMessage(Messaging.format("Erro ao dar o Vip", true, false));
             return false;
         }
