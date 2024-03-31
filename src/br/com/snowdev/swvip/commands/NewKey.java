@@ -1,6 +1,5 @@
 package br.com.snowdev.swvip.commands;
 
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -44,7 +43,6 @@ public class NewKey implements CommandExecutor
             return false;
         }
 
-
         if (days < 1) {
             sender.sendMessage(Messaging.format("error.days_invalid", true, true));
             return false;
@@ -59,7 +57,7 @@ public class NewKey implements CommandExecutor
 
         String message = "§fKey: §a{key.code} §f({key.group}) - §a{key.days} §f{words.days}.";
 
-        message = message.replace("{words.days}", WordUtils.capitalize(SwVIP.instance.ResourceMessage.getString("words.days")));
+        message = message.replace("{words.days}", SwVIP.instance.ResourceMessage.getString("words.days"));
         message = message.replace("{key.code}", key.code);
         message = message.replace("{key.group}", key.group);
         message = message.replace("{key.days}", String.valueOf(key.days));

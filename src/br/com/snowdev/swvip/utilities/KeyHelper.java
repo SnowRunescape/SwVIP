@@ -10,15 +10,15 @@ public class KeyHelper
     {
         Random random = new Random();
 
-        int tmax = SwVIP.instance.getConfig().getInt("SwVIP.key_length");
+        int max = SwVIP.instance.getConfig().getInt("SwVIP.key_length");
 
         String key = "";
 
-        if ((tmax < 6) || (tmax > 12)) {
-            tmax = 10;
+        if ((max < 6) || (max > 12)) {
+            max = 10;
         }
 
-        for (int c = 0; c < tmax; c++) {
+        for (int c = 0; c < max; c++) {
             key += String.valueOf(random.nextInt(10));
         }
 
